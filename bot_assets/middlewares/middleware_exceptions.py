@@ -7,6 +7,7 @@ class ValidationErrorMiddleware(BaseMiddleware):
         try:
             return await handler(event, data)
         except ValidationError as e:
+            logger.exception(f"Exception in handler: {e}")
             await self.handler_validation_error(event, e, data)
         
         return False

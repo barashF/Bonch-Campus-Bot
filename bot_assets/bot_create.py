@@ -1,13 +1,10 @@
 from aiogram import Bot
 from aiogram.dispatcher.dispatcher import Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
+from loguru import logger
 import asyncio
 
 from middlewares.middleware_exceptions import ValidationErrorMiddleware
-
-
-def _init_routers(dp: Dispatcher):
-    pass
 
 async def main():
     TOKEN = ''
@@ -15,9 +12,11 @@ async def main():
     bot = Bot(token=TOKEN)
     dp = Dispatcher(bots=bot, storage=storage)
 
+    logger.add("logs/log_{time}.txt", rotation="12:00")
+    
     dp.message.middleware(ValidationErrorMiddleware())
     _init_routers(dp)
-    dp.start_polling(bot)
+    await dp.start_polling(bot)
 
 
 if __name__ == '__main__':

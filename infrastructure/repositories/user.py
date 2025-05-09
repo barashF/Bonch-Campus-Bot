@@ -10,18 +10,17 @@ class UserRepository(IUserRepository):
     def __init__(self, db_context: AsyncSession):
         self.db_context = db_context
     
-    async def add(self, user: UserCreate):
-        user_entity = self._dto_to_entity(user)
+    async def add(self, **params):
+        user_entity = User(**params)
         self.db_context.add(user_entity)
         await self.db_context.commit()
         await self.db_context.refresh(user_entity)
+        
 
-    async def get(self, tg_id: int):
-        ressult = await self.db_context.execute(
+    async def get(self, tg_id: int) -> User | None:
+        result = await self.db_context.execute(
             select(User).where(User.tg_id == tg_id)
         )
-        user = ressult.fetchone()
+        user = result.scalar_one_or_none()
         return user
     
-    def _dto_to_entity(self, dto: UserCreate) -> User:
-        return User(**dto)
