@@ -1,27 +1,31 @@
+from aiogram.fsm.state import State
+from loguru import logger
+
 from dal.interfaces.services.user import IUserService
 from dal.interfaces.repositories.user import IUserRepository
-from dal.models.user import UserCreate
 from bot_assets.middlewares.exceptions import ValidationError
-from loguru import logger
+from utils.states import Registration
 
 
 class UserService(IUserService):
-    def __init__(self, user_repository: IUserRepository, current_state: str):
+    def __init__(self, user_repository: IUserRepository):
         self.user_repository = user_repository
-        self.current_state = current_state
 
     async def create_user(self, **params):
-        try:
-            self._validate_name(params['name'])
-        except Exception as e:
-            # raise e
-            logger.error(f"failure to create user, exception {e}")
-            return None
-                
+        self._validate_name(params['name'])
+        self._validate_room(params['room'])
+        await self.user_repository.add(params)
 
-    async def _validate_name(self, name: str):
+    def _validate_name(self, name: str):
         if len(name.split()) != 2:
             raise ValidationError(
                 message='Необходимо ввести имя и фамилию (Пример: Иван Иванов)',
-                state=self.current_state
+                state=Registration.name
+            )
+    
+    def _validate_room(self, room: str):
+        if not room.isdigit():
+            raise ValidationError(
+                message='Номер комнаты должен содержать только цифр',
+                state=Registration.room
             )

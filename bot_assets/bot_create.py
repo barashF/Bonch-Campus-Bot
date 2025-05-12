@@ -4,10 +4,16 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from loguru import logger
 import asyncio
 
-from middlewares.middleware_exceptions import ValidationErrorMiddleware
+from .middlewares.middleware_exceptions import ValidationErrorMiddleware
+from .handlers import start
+from utils.test_data import create_dorms
+from infrastructure.database.db import DataBase
+from configuration.config import DATABASE_URL, TOKEN
 
+def _init_routers(dp: Dispatcher):
+    dp.include_router(start.router)
+    
 async def main():
-    TOKEN = ''
     storage = MemoryStorage()
     bot = Bot(token=TOKEN)
     dp = Dispatcher(bots=bot, storage=storage)
@@ -16,8 +22,8 @@ async def main():
     
     dp.message.middleware(ValidationErrorMiddleware())
     _init_routers(dp)
+
+    await DataBase.init(DATABASE_URL)
     await dp.start_polling(bot)
+    await create_dorms()
 
-
-if __name__ == '__main__':
-    await main()

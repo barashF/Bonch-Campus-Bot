@@ -1,10 +1,9 @@
 from abc import ABC, abstractmethod
 
-from dal.models.user import UserCreate
 
 class IUserRepository(ABC):
     @abstractmethod
-    async def add(self, user: UserCreate):
+    async def add(self, **params):
         pass
 
     @abstractmethod

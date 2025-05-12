@@ -4,3 +4,9 @@ USER_PRIVILEGE = {
     "head_studcounsil": 2,
     "su": 3
 }
+
+DORMS = {
+    1: 'Дальняк',
+    2: 'Рыба',
+    3: 'Лес'
+}
