@@ -1,6 +1,8 @@
 from aiogram import BaseMiddleware
+from loguru import logger
 
 from .exceptions import ValidationError
+
 
 class ValidationErrorMiddleware(BaseMiddleware):
     async def __call__(self, handler, event, data):
@@ -17,5 +19,5 @@ class ValidationErrorMiddleware(BaseMiddleware):
 
         if error.state:
             state = data.get('state')
-            if state and state.get_state() != error.retry_state:
+            if state and await state.get_state() != error.state:
                 await state.set_state(error.state)

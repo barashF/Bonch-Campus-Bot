@@ -14,7 +14,7 @@ class User(Base):
     dorm_id: Mapped[int] = mapped_column(Integer, ForeignKey('dorms.id', name='user_dorm_fk', onupdate="RESTRICT"))
     
     data: Mapped[dict] = mapped_column(
-        MutableDict.as_mutable(JSONB), nullable=False,
+        MutableDict.as_mutable(JSONB), nullable=True,
     )
 
 class Event(Base):

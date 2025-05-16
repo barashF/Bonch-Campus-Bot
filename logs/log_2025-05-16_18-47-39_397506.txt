@@ -1,0 +1,146 @@
+2025-05-16 18:47:46.061 | ERROR    | bot_assets.middlewares.middleware_exceptions:__call__:12 - Exception in handler: Необходимо ввести имя и фамилию (Пример: Иван Иванов)
+Traceback (most recent call last):
+
+  File "/home/vitaly/Рабочий стол/BonchCampusBot/main.py", line 6, in <module>
+    asyncio.run(main())
+    │       │   └ <function main at 0x7f265b70c360>
+    │       └ <function run at 0x7f265e733ec0>
+    └ <module 'asyncio' from '/usr/lib/python3.12/asyncio/__init__.py'>
+
+  File "/usr/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           │      │   └ <coroutine object main at 0x7f265b7073e0>
+           │      └ <function Runner.run at 0x7f265e7e6020>
+           └ <asyncio.runners.Runner object at 0x7f265c242600>
+  File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           │    │     │                  └ <Task pending name='Task-1' coro=<main() running at /home/vitaly/Рабочий стол/BonchCampusBot/bot_assets/bot_create.py:27> wai...
+           │    │     └ <function BaseEventLoop.run_until_complete at 0x7f265e7dfc40>
+           │    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+           └ <asyncio.runners.Runner object at 0x7f265c242600>
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 678, in run_until_complete
+    self.run_forever()
+    │    └ <function BaseEventLoop.run_forever at 0x7f265e7dfba0>
+    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 645, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x7f265e7e59e0>
+    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 1999, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x7f265e713d80>
+    └ <Handle Task.task_wakeup(<Future finished result='k'>)>
+  File "/usr/lib/python3.12/asyncio/events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle Task.task_wakeup(<Future finished result='k'>)>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle Task.task_wakeup(<Future finished result='k'>)>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle Task.task_wakeup(<Future finished result='k'>)>
+  File "/home/vitaly/Рабочий стол/BonchCampusBot/venv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+                     │    │           │    │         └ {'dispatcher': <Dispatcher '0x7f265c361e50'>, 'bots': <aiogram.client.bot.Bot object at 0x7f265b701e80>}
+                     │    │           │    └ Update(update_id=535412734, message=Message(message_id=155, date=datetime.datetime(2025, 5, 16, 15, 47, 45, tzinfo=TzInfo(UTC...
+                     │    │           └ <aiogram.client.bot.Bot object at 0x7f265b701e80>
+                     │    └ <function Dispatcher.feed_update at 0x7f265c752b60>
+                     └ <Dispatcher '0x7f265c361e50'>
+  File "/home/vitaly/Рабочий стол/BonchCampusBot/venv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+                     │    │      └ <function TelegramEventObserver.wrap_outer_middleware at 0x7f265c7516c0>
+                     │    └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x7f265b703d10>
+                     └ <Dispatcher '0x7f265c361e50'>
+  File "/home/vitaly/Рабочий стол/BonchCampusBot/venv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+                 │       │      └ {'bots': <aiogram.client.bot.Bot object at 0x7f265b701e80>, 'dispatcher': <Dispatcher '0x7f265c361e50'>, 'bot': <aiogram.clie...
+                 │       └ Update(update_id=535412734, message=Message(message_id=155, date=datetime.datetime(2025, 5, 16, 15, 47, 45, tzinfo=TzInfo(UTC...
+                 └ functools.partial(<aiogram.dispatcher.middlewares.user_context.UserContextMiddleware object at 0x7f265b703e30>, functools.par...
+  File "/home/vitaly/Рабочий стол/BonchCampusBot/venv/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 56, in __call__
+    return await handler(event, data)
+                 │       │      └ {'bots': <aiogram.client.bot.Bot object at 0x7f265b701e80>, 'dispatcher': <Dispatcher '0x7f265c361e50'>, 'bot': <aiogram.clie...
+                 │       └ Update(update_id=535412734, message=Message(message_id=155, date=datetime.datetime(2025, 5, 16, 15, 47, 45, tzinfo=TzInfo(UTC...
+                 └ functools.partial(<aiogram.fsm.middleware.FSMContextMiddleware object at 0x7f265b703e90>, <function TelegramEventObserver.tri...
+  File "/home/vitaly/Рабочий стол/BonchCampusBot/venv/lib/python3.12/site-packages/aiogram/fsm/middleware.py", line 42, in __call__
+    return await handler(event, data)
+                 │       │      └ {'bots': <aiogram.client.bot.Bot object at 0x7f265b701e80>, 'dispatcher': <Dispatcher '0x7f265c361e50'>, 'bot': <aiogram.clie...
+                 │       └ Update(update_id=535412734, message=Message(message_id=155, date=datetime.datetime(2025, 5, 16, 15, 47, 45, tzinfo=TzInfo(UTC...
+                 └ <function TelegramEventObserver.trigger at 0x7f265b4c14e0>
+  File "/home/vitaly/Рабочий стол/BonchCampusBot/venv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+                 │             │      └ {'bots': <aiogram.client.bot.Bot object at 0x7f265b701e80>, 'dispatcher': <Dispatcher '0x7f265c361e50'>, 'bot': <aiogram.clie...
+                 │             └ Update(update_id=535412734, message=Message(message_id=155, date=datetime.datetime(2025, 5, 16, 15, 47, 45, tzinfo=TzInfo(UTC...
+                 └ <function CallableObject.call at 0x7f265b4c13a0>
+  File "/home/vitaly/Рабочий стол/BonchCampusBot/venv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+                 └ functools.partial(<bound method Dispatcher._listen_update of <Dispatcher '0x7f265c361e50'>>, Update(update_id=535412734, mess...
+  File "/home/vitaly/Рабочий стол/BonchCampusBot/venv/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+                 │    │                           │                  │        └ {'bots': <aiogram.client.bot.Bot object at 0x7f265b701e80>, 'dispatcher': <Dispatcher '0x7f265c361e50'>, 'bot': <aiogram.clie...
+                 │    │                           │                  └ Message(message_id=155, date=datetime.datetime(2025, 5, 16, 15, 47, 45, tzinfo=TzInfo(UTC)), chat=Chat(id=937776105, type='pr...
+                 │    │                           └ 'message'
+                 │    └ <function Router.propagate_event at 0x7f265c752160>
+                 └ <Dispatcher '0x7f265c361e50'>
+  File "/home/vitaly/Рабочий стол/BonchCampusBot/venv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+                 │        │                     │               │           └ {'bots': <aiogram.client.bot.Bot object at 0x7f265b701e80>, 'dispatcher': <Dispatcher '0x7f265c361e50'>, 'bot': <aiogram.clie...
+                 │        │                     │               └ Message(message_id=155, date=datetime.datetime(2025, 5, 16, 15, 47, 45, tzinfo=TzInfo(UTC)), chat=Chat(id=937776105, type='pr...
+                 │        │                     └ <function Router.propagate_event.<locals>._wrapped at 0x7f265b4c1580>
+                 │        └ <function TelegramEventObserver.wrap_outer_middleware at 0x7f265c7516c0>
+                 └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x7f265b702b10>
+  File "/home/vitaly/Рабочий стол/BonchCampusBot/venv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 141, in _wrapped
+    return await self._propagate_event(
+                 │    └ <function Router._propagate_event at 0x7f265c752200>
+                 └ <Dispatcher '0x7f265c361e50'>
+  File "/home/vitaly/Рабочий стол/BonchCampusBot/venv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 174, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+                     │      │                           │                  │        └ {'bots': <aiogram.client.bot.Bot object at 0x7f265b701e80>, 'dispatcher': <Dispatcher '0x7f265c361e50'>, 'bot': <aiogram.clie...
+                     │      │                           │                  └ Message(message_id=155, date=datetime.datetime(2025, 5, 16, 15, 47, 45, tzinfo=TzInfo(UTC)), chat=Chat(id=937776105, type='pr...
+                     │      │                           └ 'message'
+                     │      └ <function Router.propagate_event at 0x7f265c752160>
+                     └ <Router '0x7f265c30f7d0'>
+  File "/home/vitaly/Рабочий стол/BonchCampusBot/venv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+                 │        │                     │               │           └ {'bots': <aiogram.client.bot.Bot object at 0x7f265b701e80>, 'dispatcher': <Dispatcher '0x7f265c361e50'>, 'bot': <aiogram.clie...
+                 │        │                     │               └ Message(message_id=155, date=datetime.datetime(2025, 5, 16, 15, 47, 45, tzinfo=TzInfo(UTC)), chat=Chat(id=937776105, type='pr...
+                 │        │                     └ <function Router.propagate_event.<locals>._wrapped at 0x7f265b4c1620>
+                 │        └ <function TelegramEventObserver.wrap_outer_middleware at 0x7f265c7516c0>
+                 └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x7f265c30f800>
+  File "/home/vitaly/Рабочий стол/BonchCampusBot/venv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 141, in _wrapped
+    return await self._propagate_event(
+                 │    └ <function Router._propagate_event at 0x7f265c752200>
+                 └ <Router '0x7f265c30f7d0'>
+  File "/home/vitaly/Рабочий стол/BonchCampusBot/venv/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+                     │        │       │        └ {'bots': <aiogram.client.bot.Bot object at 0x7f265b701e80>, 'dispatcher': <Dispatcher '0x7f265c361e50'>, 'bot': <aiogram.clie...
+                     │        │       └ Message(message_id=155, date=datetime.datetime(2025, 5, 16, 15, 47, 45, tzinfo=TzInfo(UTC)), chat=Chat(id=937776105, type='pr...
+                     │        └ <function TelegramEventObserver.trigger at 0x7f265c751800>
+                     └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x7f265c30f800>
+  File "/home/vitaly/Рабочий стол/BonchCampusBot/venv/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+                 │             │      └ {'bots': <aiogram.client.bot.Bot object at 0x7f265b701e80>, 'dispatcher': <Dispatcher '0x7f265c361e50'>, 'bot': <aiogram.clie...
+                 │             └ Message(message_id=155, date=datetime.datetime(2025, 5, 16, 15, 47, 45, tzinfo=TzInfo(UTC)), chat=Chat(id=937776105, type='pr...
+                 └ functools.partial(<bot_assets.middlewares.middleware_exceptions.ValidationErrorMiddleware object at 0x7f265c3b8ec0>, <functio...
+
+> File "/home/vitaly/Рабочий стол/BonchCampusBot/bot_assets/middlewares/middleware_exceptions.py", line 10, in __call__
+    return await handler(event, data)
+                 │       │      └ {'bots': <aiogram.client.bot.Bot object at 0x7f265b701e80>, 'dispatcher': <Dispatcher '0x7f265c361e50'>, 'bot': <aiogram.clie...
+                 │       └ Message(message_id=155, date=datetime.datetime(2025, 5, 16, 15, 47, 45, tzinfo=TzInfo(UTC)), chat=Chat(id=937776105, type='pr...
+                 └ <function CallableObject.call at 0x7f265b4c2d40>
+
+  File "/home/vitaly/Рабочий стол/BonchCampusBot/venv/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+                 └ functools.partial(<function registration_name at 0x7f265b70c4a0>, Message(message_id=155, date=datetime.datetime(2025, 5, 16,...
+
+  File "/home/vitaly/Рабочий стол/BonchCampusBot/bot_assets/handlers/start.py", line 30, in registration_name
+    await UserService.validate_name(message.text.strip())
+          │           │             │       │    └ <method 'strip' of 'str' objects>
+          │           │             │       └ 'k'
+          │           │             └ Message(message_id=155, date=datetime.datetime(2025, 5, 16, 15, 47, 45, tzinfo=TzInfo(UTC)), chat=Chat(id=937776105, type='pr...
+          │           └ <classmethod(<function UserService.validate_name at 0x7f265b6f2e80>)>
+          └ <class 'infrastructure.services.user.UserService'>
+
+  File "/home/vitaly/Рабочий стол/BonchCampusBot/infrastructure/services/user.py", line 21, in validate_name
+    raise ValidationError(
+          └ <class 'bot_assets.middlewares.exceptions.ValidationError'>
+
+bot_assets.middlewares.exceptions.ValidationError: Необходимо ввести имя и фамилию (Пример: Иван Иванов)
