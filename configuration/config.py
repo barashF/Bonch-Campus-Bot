@@ -10,4 +10,4 @@ POSTGRES_PORT = os.getenv("POSTGRES_PORT", "5432")
 POSTGRES_DB = os.getenv("POSTGRES_DB", "mydb")
 TOKEN = os.getenv("TOKEN", "хуй")
 
-DATABASE_URL = f"postgresql+asyncpg://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
+DATABASE_URL = "postgresql+psycopg2://myuser:123@localhost:5432/myprojectdb"
