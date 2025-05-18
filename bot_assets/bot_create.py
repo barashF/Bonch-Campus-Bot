@@ -5,13 +5,16 @@ from loguru import logger
 import asyncio
 
 from .middlewares.middleware_exceptions import ValidationErrorMiddleware
-from .handlers import start
+from .handlers import start, events, admin
 from utils.test_data import create_dorms
 from infrastructure.database.db import DataBase
 from configuration.config import DATABASE_URL, POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_HOST, POSTGRES_PORT, TOKEN
 
+
 def _init_routers(dp: Dispatcher):
     dp.include_router(start.router)
+    dp.include_router(events.router)
+    dp.include_router(admin.router)
 
 async def main():
     storage = MemoryStorage()

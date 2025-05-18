@@ -1,9 +1,11 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
+from typing import List
 
 from dal.interfaces.repositories.dorms import IDormRepository
 from infrastructure.database.entities.models import Dorm
 from infrastructure.database.db import DataBase
+
 
 class DormRepository(IDormRepository):
     
@@ -25,7 +27,7 @@ class DormRepository(IDormRepository):
             return result
 
     @classmethod
-    async def get_all_dorms(cls):
+    async def get_all_dorms(cls) -> List[Dorm]:
         async with cls._sessionmaker() as db_context:
             result = await db_context.execute(
                 select(Dorm))

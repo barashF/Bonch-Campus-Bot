@@ -17,9 +17,9 @@ router = Router()
 @router.message(CommandStart())
 async def start_command(message: Message, state: FSMContext):
     tg_id = message.from_user.id
-
-    if await UserRepository.get(tg_id):
-        await message.answer('Вечер в хату')
+    user = await UserRepository.get(tg_id)
+    if user:
+        await message.answer(text='Выбери действие:', reply_markup=get_main_kb(user.data.get('privilege')))
     else:
         await message.answer(
             'Вечер в хату, для регистрации необходимо написать Имя и Фамилию'
@@ -50,6 +50,15 @@ async def registration_room(message: Message, state: FSMContext):
     await UserService.validate_room(message.text.strip())
     await state.update_data(room=int(message.text.strip()))
     data = await state.get_data()
-    await UserRepository.add(**data)
-    await message.answer(text='Выбери действие:', reply_markup=get_main_kb())
+    await state.clear()
 
+    user = await UserRepository.add(**data)
+    await message.answer(text='Выбери действие:', reply_markup=get_main_kb(user.data.get('privilege')))
+
+
+@router.callback_query(F.data == 'main_menu')
+async def get_main_menu(callback_query: CallbackQuery):
+    await callback_query.message.edit_reply_markup(reply_markup=None)
+    user = await UserRepository.get(callback_query.from_user.id)
+    await callback_query.message.answer(text='Выберите действие:',
+                                reply_markup=get_main_kb(user.data.get('privilege')))

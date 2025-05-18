@@ -9,5 +9,5 @@ POSTGRES_HOST = os.getenv("POSTGRES_HOST", "localhost")
 POSTGRES_PORT = os.getenv("POSTGRES_PORT", "5432")
 POSTGRES_DB = os.getenv("POSTGRES_DB", "mydb")
 TOKEN = os.getenv("TOKEN", "хуй")
-
+ADMINS=[937776105]
 DATABASE_URL = "postgresql+asyncpg://myuser:123@localhost:5432/myprojectdb"
